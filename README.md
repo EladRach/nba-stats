@@ -1,4 +1,5 @@
-# NBA Stats Logging System
+NBA Stats Logging System
+---
 A **scalable backend system** for logging and retrieving **NBA player statistics** using **Spring Boot, PostgresSQL, and Redis**.  
 It ensures **real-time updates** with **consistency** between the database and cache.
 ---
@@ -62,4 +63,4 @@ Follow these steps to set up and run the **NBA Stats Logging System** locally.
 - In the end I chose consistency over faster writes to ensure that once data is written for a player’s game, it is immediately available for fetching aggregate stats
 
 ---
-- Note on AWS deployment: I don’t really have hands-on experience deploying production-ready applications in AWS. I understand the general concepts, but I would need to learn more before I can implement it properly
+Note on AWS deployment: I don’t really have hands-on experience deploying production-ready applications in AWS. I understand the general concepts, but I would need to learn more before I can implement it properly
