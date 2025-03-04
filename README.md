@@ -1,8 +1,6 @@
-NBA Stats Logging System
----
-A **scalable backend system** for logging and retrieving **NBA player statistics** using **Spring Boot, PostgresSQL, and Redis**.  
-It ensures **real-time updates** with **consistency** between the database and cache.
----
+# NBA Stats Logging System
+A scalable backend system for logging and retrieving NBA player statistics using Spring Boot, PostgresSQL, and Redis. It ensures real-time updates with consistency between the database and cache.
+
 ## Tech Stack
 | **Technology**    | **Usage** |
 |-------------------|----------|
