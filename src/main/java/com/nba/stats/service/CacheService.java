@@ -50,7 +50,7 @@ public class CacheService {
                     operations.multi();
                     invalidateCache(playerId,teamId);
                     updatePlayerCache(playerId,playerStats);
-                    updateTeamCache(playerId,teamStats);
+                    updateTeamCache(teamId,teamStats);
                     return operations.exec();
                 }
             });
