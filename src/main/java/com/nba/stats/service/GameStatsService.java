@@ -1,12 +1,8 @@
 package com.nba.stats.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nba.stats.dto.GameStatsUpdateMessage;
 import com.nba.stats.repository.GameStatsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +13,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GameStatsService {
     private final GameStatsRepository gameStatsRepository;
-    private final KafkaTemplate<String, String> kafkaTemplate;
     private final CacheService cacheService;
-    private final ObjectMapper objectMapper;
 
     @Transactional
     public void logGameStats(int playerId, int teamId, int gameId, int points, int rebounds, int assists, int steals,
@@ -74,19 +68,6 @@ public class GameStatsService {
         } catch (Exception e) {
             log.error("Failed to write game stats to database for player {}: {}", playerId, e.getMessage());
             throw new RuntimeException("Database write failed", e);
-        }
-    }
-
-    private void sendStatsUpdateToKafka(int playerId, int teamId) {
-        try {
-            String jsonMessage = objectMapper.writeValueAsString(new GameStatsUpdateMessage(playerId, teamId));
-            kafkaTemplate.send("nba-stats-topic", jsonMessage);
-        } catch (JsonProcessingException e) {
-            log.error("Failed to serialize Kafka message for player {}: {}", playerId, e.getMessage());
-            throw new RuntimeException("Failed to serialize Kafka message", e);
-        } catch (Exception e) {
-            log.error("Failed to send Kafka message for player {}: {}", playerId, e.getMessage());
-            throw new RuntimeException("Failed to send Kafka message", e);
         }
     }
 }
